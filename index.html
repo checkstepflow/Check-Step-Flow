@@ -1,4 +1,5 @@
 <!DOCTYPE html>
+<html lang="pt-BR">
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <title>Check Step Flow · Media and Information Literacy</title>
@@ -755,7 +756,7 @@
       </div>
       <div class="podcast-card">
         <div class="spotify-embed">
-          <iframe title="Player do episodio no Spotify" style="border-radius:12px" src="https://open.spotify.com/embed/episode/5uEuoIXFYElMQzwrx43Iqy?utm_source=generator" width="100%" height="352" frameBorder="0" allowfullscreen allow="autoplay; clipboard-write; encrypted-media; fullscreen; picture-in-picture" loading="lazy"></iframe>
+          <iframe title="Player do episódio no Spotify" style="border-radius:12px" src="https://open.spotify.com/embed/episode/5uEuoIXFYElMQzwrx43Iqy?utm_source=generator" width="100%" height="352" frameBorder="0" allowfullscreen allow="autoplay; clipboard-write; encrypted-media; fullscreen; picture-in-picture" loading="lazy"></iframe>
         </div>
         <div class="podcast-row">
           <div class="podcast-text">
@@ -994,7 +995,7 @@
     "method-step-h3": "decode the mechanism",
     "method-step-p": "A volunteer specialist (sociologist, economist, journalist, psychologist or educator) answers <strong>four fixed questions</strong>: who is the opinion leader, how does the algorithm amplify it, who pays and for what, and what is being normalized.",
     "method-flow-h3": "return critical action",
-    "method-flow-p": "Each case becomes a short checklist, format-specific warning signs, and a counter-narrative the audience can produce themselves, turning receivers into <strong>ethical gatekeepers</strong> of their own network.",
+    "method-flow-p": "Each case becomes a short checklist, warning signs, and a counter-narrative the audience can produce themselves, turning receivers into <strong>ethical gatekeepers</strong> of their own network.",
 
     "steps-eyebrow": "A FLOW tool",
     "steps-h2": "5 steps to recognize a responsible influencer.",
@@ -1029,8 +1030,8 @@
     "stats-eyebrow": "Why this matters",
     "stats-h2": "Brazil is connected. And exposed.",
     "stat-1-num": "90.5%", "stat-1-label": "of Brazilians aged 10+ use the internet", "stat-1-source": "IBGE, PNAD Contínua TIC, 2025–2026",
-    "stat-2-num": "R$18–21B", "stat-2-label": "transferred monthly via Pix to betting platforms in 2024", "stat-2-source": "Central Bank of Brazil, Special Study No. 119, 2024",
-    "stat-3-num": "R$3B", "stat-3-label": "sent by 5 million welfare (Bolsa Família) recipients in one month", "stat-3-source": "Central Bank of Brazil, 2024",
+    "stat-2-num": "R$18–21bn", "stat-2-label": "transferred monthly via Pix to betting platforms in 2024", "stat-2-source": "Central Bank of Brazil, Special Study No. 119, 2024",
+    "stat-3-num": "R$3bn", "stat-3-label": "sent by 5 million welfare (Bolsa Família) recipients in one month", "stat-3-source": "Central Bank of Brazil, 2024",
     "stat-4-num": "937", "stat-4-label": "influencer profiles removed for unlawful betting ads; 803 promoted underground platforms", "stat-4-source": "Secretariat of Prizes and Bets / Treasury, 2026",
     "stat-5-num": "24 million", "stat-5-label": "people transferred money to betting sites in a single month", "stat-5-source": "Central Bank of Brazil, 2024",
     "stat-6-num": "R$143bn", "stat-6-label": "withdrawn from retail trade due to betting-linked defaults", "stat-6-source": "CNC, 2026 · methodology disputed by the sector",
@@ -1232,5 +1233,27 @@
   if ('IntersectionObserver' in window) {
     new IntersectionObserver(function (en) { if (en[0].isIntersecting) start(); else stop(); }, { threshold: 0.3 }).observe(d);
   } else { start(); }
+})();
+
+(function () {
+  var T = {
+    pt: { flip: 'Clique para virar', nav: 'Navegar pelos temas', prev: 'Tema anterior', next: 'Próximo tema', player: 'Player do episódio no Spotify', lang: 'pt-BR' },
+    en: { flip: 'Click to flip', nav: 'Browse topics', prev: 'Previous topic', next: 'Next topic', player: 'Spotify episode player', lang: 'en' }
+  };
+  function sync() {
+    var active = document.querySelector('.lang-btn.is-active');
+    var t = T[active && active.getAttribute('data-lang') === 'en' ? 'en' : 'pt'];
+    document.documentElement.lang = t.lang;
+    Array.prototype.forEach.call(document.querySelectorAll('.fc-hint span:last-child'), function (e) { e.textContent = t.flip; });
+    var set = function (sel, attr, v) { var e = document.querySelector(sel); if (e) e.setAttribute(attr, v); };
+    set('.theme-ctrl', 'aria-label', t.nav);
+    set('#theme-prev', 'aria-label', t.prev);
+    set('#theme-next', 'aria-label', t.next);
+    set('.spotify-embed iframe', 'title', t.player);
+  }
+  Array.prototype.forEach.call(document.querySelectorAll('.lang-btn'), function (b) {
+    b.addEventListener('click', function () { setTimeout(sync, 0); });
+  });
+  setTimeout(sync, 0);
 })();
 </script>
