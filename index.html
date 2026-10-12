@@ -209,18 +209,7 @@
 
   .flow-diagram { --gap: 36px; --col: calc((100% - 3 * var(--gap)) / 4); margin-top: 72px; display: grid; grid-template-columns: repeat(4, 1fr); gap: var(--gap); position: relative; }
   .flow-diagram::before { content: ""; position: absolute; top: -28px; left: calc(var(--col) / 2); width: calc(3 * (var(--col) + var(--gap))); height: 1px; background: linear-gradient(90deg, transparent, rgba(215, 171, 90, 0.45) 12%, rgba(215, 171, 90, 0.45) 88%, transparent); }
-  .flow-diagram::after { content: ""; position: absolute; top: -33px; left: calc(var(--col) / 2); width: 11px; height: 11px; margin-left: -5px; border-radius: 50%; background: var(--gold); box-shadow: 0 0 16px 3px rgba(215, 171, 90, 0.7); opacity: 0; animation: flow-travel 9s linear infinite; }
-  @keyframes flow-travel {
-    0% { transform: translateX(0); opacity: 0; }
-    2% { opacity: 1; }
-    66% { transform: translateX(calc(3 * (var(--col) + var(--gap)))); opacity: 1; }
-    70%, 100% { transform: translateX(calc(3 * (var(--col) + var(--gap)))); opacity: 0; }
-  }
-  .flow-node { position: relative; padding: 26px 16px 28px; border: 1px solid var(--panel-border); border-radius: 4px; background: var(--panel); text-align: center; min-width: 0; animation: node-glow 9s ease-in-out infinite; }
-  .flow-node:nth-child(1) { animation-delay: -0.5s; }
-  .flow-node:nth-child(2) { animation-delay: 1.5s; }
-  .flow-node:nth-child(3) { animation-delay: 3.5s; }
-  .flow-node:nth-child(4) { animation-delay: 5.5s; }
+  .flow-node { position: relative; padding: 26px 16px 28px; border: 1px solid var(--panel-border); border-radius: 4px; background: var(--panel); text-align: center; min-width: 0; }
   @keyframes node-glow {
     0%, 22%, 100% { border-color: var(--panel-border); box-shadow: 0 0 0 0 rgba(215, 171, 90, 0); background: var(--panel); transform: none; }
     6%, 16% { border-color: var(--gold); box-shadow: 0 0 0 1px rgba(215, 171, 90, 0.5), 0 0 30px rgba(215, 171, 90, 0.22); background: rgba(215, 171, 90, 0.09); transform: translateY(-4px); }
@@ -455,7 +444,7 @@
   @keyframes fig-breathe { from { transform: translateY(0); } to { transform: translateY(2.5px); } }
   .f-head { transform-box: view-box; transform-origin: 50px 70px; animation: fig-tilt 3.2s ease-in-out infinite alternate; }
   .f-bow { animation-name: fig-bow; }
-  @keyframes fig-tilt { from { transform: rotate(-3deg); } to { transform: rotate(3deg); } }
+  @keyframes fig-tilt { from { transform: rotate(-1.8deg); } to { transform: rotate(1.8deg); } }
   @keyframes fig-bow { from { transform: rotate(4deg) translateY(1px); } to { transform: rotate(11deg) translateY(2px); } }
   .f-mouth { fill: #7a2f22; transform-box: fill-box; transform-origin: center; animation: fig-talk .45s ease-in-out infinite alternate; }
   @keyframes fig-talk { from { transform: scaleY(.35); } to { transform: scaleY(1.1); } }
@@ -506,6 +495,45 @@
   .guide-lang { color: #fff; border-color: rgba(255, 255, 255, 0.45); }
   .guide-card h3 { color: #fff; }
   .guide-card p, .guide-card p strong { color: #fff; }
+
+  .fn-fig .hl { fill: #fff; }
+  .fn-fig .cheek { fill: #ee8a78; opacity: .55; }
+  .fn-fig .line { stroke-width: 2; }
+  .f-bow { animation-name: fig-bow2; }
+  @keyframes fig-bow2 { from { transform: rotate(2deg); } to { transform: rotate(7deg) translateY(1px); } }
+
+  /* ---------- Diagrama: etapas individuais, depois a linha do tempo ---------- */
+  .flow-diagram::after { content: ""; position: absolute; top: -33px; left: calc(var(--col) / 2 + var(--bx, 0) * (var(--col) + var(--gap))); width: 11px; height: 11px; margin-left: -5px; border-radius: 50%; background: var(--gold); box-shadow: 0 0 16px 3px rgba(215, 171, 90, 0.7); transition: left var(--bt, .9s) cubic-bezier(.45, .05, .25, 1); }
+  .flow-node { transition: opacity .5s ease, transform .5s ease, border-color .5s ease, box-shadow .5s ease, background .5s ease; }
+  .flow-node:not(:last-child)::after { transition: opacity .5s ease; }
+  .flow-diagram[data-mode="solo"] .flow-node { opacity: .42; transform: none; }
+  .flow-diagram[data-mode="solo"] .flow-node::after { opacity: 0; }
+  .flow-diagram[data-mode="solo"] .flow-node.is-active { opacity: 1; transform: translateY(-6px) scale(1.05); border-color: var(--gold); background: rgba(215, 171, 90, 0.09); box-shadow: 0 0 0 1px rgba(215, 171, 90, 0.5), 0 0 30px rgba(215, 171, 90, 0.22); }
+  .flow-diagram[data-mode="solo"] .flow-node.is-algo.is-active { border-color: var(--alert); background: var(--alert-tint); box-shadow: 0 0 0 1px rgba(217, 105, 74, 0.7), 0 0 34px rgba(217, 105, 74, 0.35); }
+  .flow-diagram[data-mode="all"] .flow-node { opacity: 1; border-color: rgba(215, 171, 90, 0.4); }
+  .flow-diagram[data-mode="all"] .flow-node.is-algo { border-color: rgba(217, 105, 74, 0.55); }
+  @media (max-width: 640px) { .flow-diagram[data-mode="solo"] .flow-node.is-active { transform: scale(1.03); } }
+  @media (prefers-reduced-motion: reduce) { .flow-diagram::after { display: none; } .flow-node { transition: none; } }
+
+  .fn-fig .hd { fill: #e7bd76; } .fn-fig .hr { fill: #1a3566; }
+  .f-ring { fill: none; stroke: #d7ab5a; stroke-width: 3; animation: fig-ring 2s ease-in-out infinite alternate; }
+  @keyframes fig-ring { from { opacity: .3; stroke-width: 2; } to { opacity: .95; stroke-width: 4; } }
+  .f-beam { fill: #6f97e0; opacity: .18; animation: fig-glow 1.6s ease-in-out infinite alternate; }
+
+  /* ---------- Robô sem olhos vermelhos e cartões brancos da linha do tempo ---------- */
+  .f-ant { fill: #d7ab5a; }
+  .f-bars rect { fill: #d7ab5a; transform-box: fill-box; transform-origin: 50% 100%; animation: fig-bar 1.1s ease-in-out infinite alternate; }
+  .f-bars rect:nth-child(2) { animation-delay: .25s; } .f-bars rect:nth-child(3) { animation-delay: .5s; } .f-bars rect:nth-child(4) { animation-delay: .75s; }
+  @keyframes fig-bar { from { transform: scaleY(.25); } to { transform: scaleY(1); } }
+  .flow-diagram .flow-node, .flow-diagram .flow-node.is-algo { background: #fff; border-color: rgba(11, 23, 48, 0.12); }
+  .flow-diagram .flow-node.is-algo { border-color: rgba(217, 105, 74, 0.55); }
+  .flow-diagram .flow-node .fn-label { color: #a9782e; }
+  .flow-diagram .flow-node.is-algo .fn-label { color: #b9482a; }
+  .flow-diagram .flow-node .fn-title { color: var(--paper-ink); }
+  .flow-diagram .flow-node.is-algo .fn-title { color: #b9482a; }
+  .flow-diagram[data-mode="solo"] .flow-node.is-active, .flow-diagram[data-mode="solo"] .flow-node.is-algo.is-active { background: #fff; }
+  .flow-diagram[data-mode="all"] .flow-node { border-color: rgba(215, 171, 90, 0.7); }
+  .flow-diagram[data-mode="all"] .flow-node.is-algo { border-color: rgba(217, 105, 74, 0.7); }
 </style>
 
 <div class="page">
@@ -568,22 +596,22 @@
       </p>
       <div class="reveal flow-diagram">
         <div class="flow-node">
-          <svg class="fn-fig fig-1" viewBox="0 0 100 100" aria-hidden="true"><g class="f-breathe"><path class="jk-b" d="M12 100C12 80 28 72 50 72C72 72 88 80 88 100Z"/><rect class="sk" x="43" y="58" width="14" height="18" rx="6"/><g class="f-head"><ellipse class="sk" cx="50" cy="45" rx="16" ry="18"/><path class="hair" d="M33 44C30 24 44 16 54 18C67 20 70 33 67 44C63 35 57 31 49 32C42 33 36 37 33 44Z"/><ellipse class="eye" cx="44" cy="45" rx="1.8" ry="2.4"/><ellipse class="eye" cx="56" cy="45" rx="1.8" ry="2.4"/><ellipse class="f-mouth" cx="50" cy="55" rx="3.8" ry="2.6"/></g><path class="line" d="M66 80L70 58" stroke-width="5" stroke="#a9782e"/><circle class="mic-head" cx="72" cy="50" r="7"/><path class="line" d="M67 48h10M67 52h10" stroke="#a9782e" stroke-width="1.2"/><circle class="sk" cx="66" cy="80" r="5.5"/><path class="f-wave w1" d="M83 43q5 7 0 14"/><path class="f-wave w2" d="M88 38q9 12 0 24"/></g></svg>
+          <svg class="fn-fig fig-1" viewBox="0 0 100 100" aria-hidden="true"><g class="f-breathe"><path style="fill:#4a72c4" d="M16 100C16 78 30 66 50 66C70 66 84 78 84 100Z"/><g class="f-head"><circle class="hd" cx="50" cy="42" r="18"/><path class="hr" d="M32 40C32 25 41 19 50 19C59 19 68 25 68 40C63 31 57 28.5 50 28.5C43 28.5 37 31 32 40Z"/><path d="M30 44C28 22 72 22 70 44" stroke="#fff" stroke-width="3" fill="none" stroke-linecap="round"/><rect x="26" y="42" width="7" height="13" rx="3" fill="#fff"/><rect x="67" y="42" width="7" height="13" rx="3" fill="#fff"/><path d="M30 55Q34 64 45 59" stroke="#fff" stroke-width="2" fill="none" stroke-linecap="round"/><circle cx="46" cy="59" r="2.8" fill="#d7ab5a"/></g><path class="f-wave w1" d="M82 38q5 7 0 14"/><path class="f-wave w2" d="M88 33q9 12 0 24"/></g></svg>
           <div class="fn-label" id="fn-1-label">Emissor</div>
           <div class="fn-title" id="fn-1-title">conteúdo</div>
         </div>
         <div class="flow-node">
-          <svg class="fn-fig fig-2" viewBox="0 0 100 100" aria-hidden="true"><g class="f-breathe"><path class="jk-w" d="M12 100C12 80 28 72 50 72C72 72 88 80 88 100Z"/><rect class="sk" x="43" y="58" width="14" height="18" rx="6"/><g class="f-head"><circle class="hair" cx="53" cy="14" r="7"/><path class="hair" d="M31 44C27 56 29 66 36 73L41 60Z"/><ellipse class="sk" cx="50" cy="45" rx="16" ry="18"/><path class="hair" d="M32 46C28 22 44 14 52 16C68 18 72 34 68 48C66 40 62 33 50 32C40 32 35 38 32 46Z"/><ellipse class="eye" cx="44" cy="45" rx="1.8" ry="2.4"/><ellipse class="eye" cx="56" cy="45" rx="1.8" ry="2.4"/><path class="line" d="M45 52Q50 57 55 52"/></g><path d="M76 86C86 72 84 60 77 50" stroke="#e2aa7f" stroke-width="8" stroke-linecap="round" fill="none"/><rect x="68" y="20" width="18" height="30" rx="4" fill="#0b1730" stroke="#d7ab5a" stroke-width="2.5"/><circle cx="77" cy="26" r="1.7" fill="#d7ab5a"/><circle class="sk" cx="77" cy="51" r="5"/><g transform="translate(80 14)"><path class="f-heart h1" d="M0 -1c-2-3-6 0-3 3l3 3 3-3c3-3-1-6-3-3z"/></g><g transform="translate(66 10)"><path class="f-heart h2" d="M0 -1c-2-3-6 0-3 3l3 3 3-3c3-3-1-6-3-3z"/></g></g></svg>
+          <svg class="fn-fig fig-2" viewBox="0 0 100 100" aria-hidden="true"><g class="f-breathe"><circle class="f-ring" cx="50" cy="42" r="28"/><path style="fill:#1a3566" d="M16 100C16 78 30 66 50 66C70 66 84 78 84 100Z"/><g class="f-head"><circle class="hr" cx="50" cy="14" r="6"/><circle class="hd" cx="50" cy="42" r="18"/><path class="hr" d="M32 40C32 25 41 19 50 19C59 19 68 25 68 40C63 31 57 28.5 50 28.5C43 28.5 37 31 32 40Z"/></g><path d="M78 84C90 76 89 66 82 58" stroke="#e7bd76" stroke-width="8" stroke-linecap="round" fill="none"/><rect x="72" y="42" width="16" height="26" rx="4" fill="#0b1730" stroke="#d7ab5a" stroke-width="2.5"/><circle cx="80" cy="47" r="1.5" fill="#d7ab5a"/><circle cx="81" cy="60" r="5" fill="#e7bd76"/><g transform="translate(86 34)"><path class="f-heart h1" d="M0 -1c-2-3-6 0-3 3l3 3 3-3c3-3-1-6-3-3z"/></g><g transform="translate(74 28)"><path class="f-heart h2" d="M0 -1c-2-3-6 0-3 3l3 3 3-3c3-3-1-6-3-3z"/></g></g></svg>
           <div class="fn-label" id="fn-2-label">1º elo</div>
           <div class="fn-title" id="fn-2-title">influenciador</div>
         </div>
         <div class="flow-node is-algo">
-          <svg class="fn-fig fig-3" viewBox="0 0 100 100" aria-hidden="true"><g class="f-breathe"><path d="M50 24V11" stroke="#d9694a" stroke-width="3" stroke-linecap="round"/><circle class="f-ant" cx="50" cy="8" r="4.5"/><rect class="rb-metal" x="19" y="36" width="8" height="14" rx="3"/><rect class="rb-metal" x="73" y="36" width="8" height="14" rx="3"/><rect class="rb-metal" x="44" y="60" width="12" height="14" rx="3"/><path class="rb-head" d="M16 100C16 80 31 72 50 72C69 72 84 80 84 100Z"/><rect class="rb-head" x="26" y="22" width="48" height="40" rx="13"/><rect x="33" y="33" width="34" height="18" rx="9" fill="#05070f"/><g class="f-eyes"><circle class="f-eye" cx="43" cy="42" r="4"/><circle class="f-eye" cx="57" cy="42" r="4"/></g><circle class="f-gear" cx="50" cy="88" r="8" stroke="#d9694a" stroke-width="2.4" stroke-dasharray="4 2.6" fill="none"/><circle cx="50" cy="88" r="3" fill="#d9694a"/></g></svg>
+          <svg class="fn-fig fig-3" viewBox="0 0 100 100" aria-hidden="true"><g class="f-breathe"><path d="M50 24V11" stroke="#d7ab5a" stroke-width="3" stroke-linecap="round"/><circle class="f-ant" cx="50" cy="8" r="4.5"/><rect x="19" y="36" width="8" height="14" rx="3" fill="#33456e"/><rect x="73" y="36" width="8" height="14" rx="3" fill="#33456e"/><rect x="44" y="60" width="12" height="14" rx="3" fill="#33456e"/><path d="M16 100C16 80 31 72 50 72C69 72 84 80 84 100Z" fill="#1a3566"/><rect x="26" y="22" width="48" height="40" rx="13" fill="#1a3566"/><rect x="32" y="31" width="36" height="22" rx="7" fill="#0b1730"/><g class="f-bars"><rect x="38" y="38" width="5" height="11" rx="2.5"/><rect x="46" y="38" width="5" height="11" rx="2.5"/><rect x="54" y="38" width="5" height="11" rx="2.5"/><rect x="62" y="38" width="5" height="11" rx="2.5"/></g><circle class="f-gear" cx="50" cy="88" r="8" stroke="#d7ab5a" stroke-width="2.4" stroke-dasharray="4 2.6" fill="none"/><circle cx="50" cy="88" r="3" fill="#d7ab5a"/></g></svg>
           <div class="fn-label" id="fn-3-label">2º elo</div>
           <div class="fn-title" id="fn-3-title">algoritmo</div>
         </div>
         <div class="flow-node">
-          <svg class="fn-fig fig-4" viewBox="0 0 100 100" aria-hidden="true"><g class="f-breathe"><path class="jk-g" d="M12 100C12 80 28 72 50 72C72 72 88 80 88 100Z"/><rect class="sk" x="43" y="58" width="14" height="18" rx="6"/><g class="f-head f-bow"><ellipse class="sk" cx="50" cy="45" rx="16" ry="18"/><path class="hair" d="M33 44C30 24 44 16 54 18C67 20 70 33 67 44C63 35 57 31 49 32C42 33 36 37 33 44Z"/><path class="line" d="M41 47q3 2.4 6 0M53 47q3 2.4 6 0"/><path class="line" d="M46 55q4 2 8 0"/></g><ellipse class="f-glow" cx="50" cy="64" rx="15" ry="7" fill="#6f97e0"/><rect x="36" y="70" width="28" height="25" rx="5" fill="#0b1730" stroke="#fff" stroke-width="2"/><rect x="39" y="73" width="22" height="19" rx="3" fill="#4a72c4"/><path class="f-sc s1" d="M42 78h16"/><path class="f-sc s2" d="M42 78h16"/><path class="f-sc s3" d="M42 78h16"/><circle class="sk" cx="34" cy="88" r="5"/><circle class="sk" cx="66" cy="88" r="5"/></g></svg>
+          <svg class="fn-fig fig-4" viewBox="0 0 100 100" aria-hidden="true"><g class="f-breathe"><path style="fill:#d7ab5a" d="M16 100C16 78 30 66 50 66C70 66 84 78 84 100Z"/><g class="f-head f-bow"><circle class="hd" cx="50" cy="42" r="18"/><path class="hr" d="M30 52C26 20 74 20 70 52C66 35 58 29 50 29C42 29 34 35 30 52Z"/></g><rect x="36" y="72" width="28" height="25" rx="5" fill="#0b1730" stroke="#fff" stroke-width="2"/><rect x="39" y="75" width="22" height="19" rx="3" fill="#4a72c4"/><path class="f-sc s1" d="M42 80h16"/><path class="f-sc s2" d="M42 80h16"/><path class="f-sc s3" d="M42 80h16"/><circle cx="34" cy="90" r="5" fill="#e7bd76"/><circle cx="66" cy="90" r="5" fill="#e7bd76"/></g></svg>
           <div class="fn-label" id="fn-4-label">Destino</div>
           <div class="fn-title" id="fn-4-title">você</div>
         </div>
@@ -1122,5 +1150,38 @@
     new IntersectionObserver(function (en) { visible = en[0].isIntersecting; }).observe(track);
   } else { visible = true; }
   setInterval(tick, 3800);
+})();
+
+(function () {
+  var d = document.querySelector('.flow-diagram');
+  if (!d) return;
+  var nodes = Array.prototype.slice.call(d.querySelectorAll('.flow-node'));
+  var reduce = window.matchMedia && window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+  function ball(i, dur) { d.style.setProperty('--bt', dur); d.style.setProperty('--bx', i); }
+  function solo(i) {
+    d.setAttribute('data-mode', 'solo');
+    nodes.forEach(function (n, k) { n.classList.toggle('is-active', k === i); });
+    ball(i, '.9s');
+  }
+  function all() {
+    nodes.forEach(function (n) { n.classList.remove('is-active'); });
+    d.setAttribute('data-mode', 'all');
+    ball(0, '0s');
+    setTimeout(function () { ball(nodes.length - 1, '3s'); }, 60);
+  }
+  if (reduce) { d.setAttribute('data-mode', 'all'); return; }
+  var timers = [], running = false;
+  function later(fn, ms) { timers.push(setTimeout(fn, ms)); }
+  function cycle() {
+    var t = 0, step = 2400;
+    nodes.forEach(function (n, i) { later(function () { solo(i); }, t); t += step; });
+    later(all, t); t += 6200;
+    later(cycle, t);
+  }
+  function start() { if (running) return; running = true; cycle(); }
+  function stop() { running = false; timers.forEach(clearTimeout); timers = []; }
+  if ('IntersectionObserver' in window) {
+    new IntersectionObserver(function (en) { if (en[0].isIntersecting) start(); else stop(); }, { threshold: 0.3 }).observe(d);
+  } else { start(); }
 })();
 </script>
