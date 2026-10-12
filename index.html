@@ -381,6 +381,22 @@
   .method-card, .guide-card, .podcast-card, .suggest-box, .sdg-badge, .stat-card, .team-card, .theme-card { border-radius: 4px; }
   .suggest-input, .btn-primary, .btn-secondary { border-radius: 4px; }
   img.avatar { object-fit: cover; width: 72px; height: 72px; }
+
+  /* ---------- Flash cards que viram ---------- */
+  .theme-card:not(.theme-card-cta) { display: block; padding: 0; background: none; border: none; height: 330px; perspective: 1400px; cursor: pointer; }
+  .fc-inner { position: relative; width: 100%; height: 100%; transform-style: preserve-3d; transition: transform .9s cubic-bezier(.4, .15, .2, 1); }
+  .theme-card.is-flipped .fc-inner { transform: rotateY(180deg); }
+  .fc-face { position: absolute; inset: 0; backface-visibility: hidden; -webkit-backface-visibility: hidden; border-radius: 4px; padding: 28px 26px 24px; display: flex; flex-direction: column; gap: 10px; overflow: hidden; }
+  .fc-front { background: var(--bg-1); border: 1px solid var(--panel-border); }
+  .fc-front .tc-title { font-size: 26px; line-height: 1.15; margin-top: 6px; }
+  .fc-hint { margin-top: auto; display: flex; align-items: center; gap: 10px; font-family: var(--mono); font-size: 11px; letter-spacing: 0.06em; text-transform: uppercase; color: var(--ink-faint); }
+  .fc-q { width: 30px; height: 30px; border-radius: 50%; border: 1px solid var(--gold); color: var(--gold); display: inline-flex; align-items: center; justify-content: center; font-family: var(--serif); font-size: 17px; }
+  .fc-back { background: var(--gold); border: 1px solid var(--gold); transform: rotateY(180deg); justify-content: space-between; }
+  .fc-back .tc-desc { color: #16233f; font-size: 15.5px; }
+  .fc-back .tc-desc strong { color: #16233f; }
+  .fc-back .tc-evidence { color: rgba(22, 35, 63, 0.8); margin-top: auto; padding-top: 12px; border-top: 1px solid rgba(22, 35, 63, 0.25); }
+  @media (max-width: 640px) { .theme-card:not(.theme-card-cta) { height: 390px; } .fc-face { padding: 22px 20px; } }
+  @media (prefers-reduced-motion: reduce) { .fc-inner { transition: none; } }
 </style>
 
 <div class="page">
@@ -932,6 +948,24 @@
   var track = document.querySelector('.theme-grid');
   if (!track) return;
   var cards = Array.prototype.slice.call(track.children);
+  function flip(c, on) { c.classList.toggle('is-flipped', on); c.setAttribute('aria-pressed', on ? 'true' : 'false'); }
+  cards.forEach(function (c) {
+    if (c.classList.contains('theme-card-cta')) return;
+    var num = c.querySelector('.tc-num'), title = c.querySelector('.tc-title'), desc = c.querySelector('.tc-desc'), ev = c.querySelector('.tc-evidence');
+    var inner = document.createElement('div'); inner.className = 'fc-inner';
+    var front = document.createElement('div'); front.className = 'fc-face fc-front';
+    var back = document.createElement('div'); back.className = 'fc-face fc-back';
+    var hint = document.createElement('div'); hint.className = 'fc-hint';
+    hint.innerHTML = '<span class="fc-q" aria-hidden="true">?</span><span>Clique para virar</span>';
+    if (num) front.appendChild(num);
+    front.appendChild(title); front.appendChild(hint);
+    back.appendChild(desc); back.appendChild(ev);
+    inner.appendChild(front); inner.appendChild(back);
+    c.appendChild(inner);
+    c.setAttribute('role', 'button'); c.setAttribute('tabindex', '0'); c.setAttribute('aria-pressed', 'false');
+    c.addEventListener('click', function () { flip(c, !c.classList.contains('is-flipped')); });
+    c.addEventListener('keydown', function (e) { if (e.key === 'Enter' || e.key === ' ') { e.preventDefault(); flip(c, !c.classList.contains('is-flipped')); } });
+  });
   var count = document.getElementById('theme-count');
   var timer = null, paused = false;
   function current() {
@@ -951,12 +985,18 @@
   var reduce = window.matchMedia && window.matchMedia('(prefers-reduced-motion: reduce)').matches;
   if (reduce) return;
   var visible = false;
-  function tick() { if (!paused && visible) step(1); }
+  function tick() {
+    if (paused || !visible) return;
+    var c = cards[current()];
+    if (c.classList.contains('theme-card-cta')) { step(1); return; }
+    if (!c.classList.contains('is-flipped')) { flip(c, true); }
+    else { flip(c, false); step(1); }
+  }
   ['mouseenter', 'focusin', 'touchstart'].forEach(function (e) { track.parentNode.addEventListener(e, function () { paused = true; }, { passive: true }); });
   ['mouseleave', 'focusout'].forEach(function (e) { track.parentNode.addEventListener(e, function () { paused = false; }); });
   if ('IntersectionObserver' in window) {
     new IntersectionObserver(function (en) { visible = en[0].isIntersecting; }).observe(track);
   } else { visible = true; }
-  timer = setInterval(tick, 5500);
+  timer = setInterval(tick, 4200);
 })();
 </script>
