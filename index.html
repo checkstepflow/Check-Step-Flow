@@ -534,6 +534,27 @@
   .flow-diagram[data-mode="solo"] .flow-node.is-active, .flow-diagram[data-mode="solo"] .flow-node.is-algo.is-active { background: #fff; }
   .flow-diagram[data-mode="all"] .flow-node { border-color: rgba(215, 171, 90, 0.7); }
   .flow-diagram[data-mode="all"] .flow-node.is-algo { border-color: rgba(217, 105, 74, 0.7); }
+
+  /* ---------- Versão simples: só o cartão da vez acende ---------- */
+  .flow-node.is-algo::before { display: none; }
+  .flow-node:not(:last-child)::after { animation: none; opacity: .35; }
+  .fn-fig *, .f-breathe { animation: none !important; }
+  .f-wave, .f-heart, .f-ring, .f-beam { display: none; }
+  .f-bars rect:nth-child(1) { transform: scaleY(.5); } .f-bars rect:nth-child(2) { transform: scaleY(.95); }
+  .f-bars rect:nth-child(3) { transform: scaleY(.65); } .f-bars rect:nth-child(4) { transform: scaleY(1); }
+  .flow-diagram[data-mode] .flow-node { opacity: 1; transform: none; }
+  .flow-diagram[data-mode="solo"] .flow-node.is-active { transform: none; box-shadow: 0 0 0 2px var(--gold), 0 8px 24px rgba(215, 171, 90, 0.25); border-color: var(--gold); }
+  .flow-diagram[data-mode="solo"] .flow-node.is-algo.is-active { box-shadow: 0 0 0 2px #d9694a, 0 8px 24px rgba(217, 105, 74, 0.25); border-color: #d9694a; }
+  .flow-diagram[data-mode="all"] .flow-node, .flow-diagram[data-mode="all"] .flow-node.is-algo { border-color: rgba(11, 23, 48, 0.12); }
+
+  /* ---------- Tons de pele diferentes ---------- */
+  .fn-fig.fig-1 .hd { fill: #a96b45; }
+  .fn-fig.fig-2 .hd { fill: #d9a679; }
+  .fn-fig.fig-4 .hd { fill: #7a4a2f; }
+
+  /* ---------- Personagens em azul-escuro ---------- */
+  .fn-fig .hd, .fn-fig.fig-1 .hd, .fn-fig.fig-2 .hd, .fn-fig.fig-4 .hd { fill: #1a3566; }
+  .fn-fig .hr { fill: #0b1730; }
 </style>
 
 <div class="page">
@@ -596,12 +617,12 @@
       </p>
       <div class="reveal flow-diagram">
         <div class="flow-node">
-          <svg class="fn-fig fig-1" viewBox="0 0 100 100" aria-hidden="true"><g class="f-breathe"><path style="fill:#4a72c4" d="M16 100C16 78 30 66 50 66C70 66 84 78 84 100Z"/><g class="f-head"><circle class="hd" cx="50" cy="42" r="18"/><path class="hr" d="M32 40C32 25 41 19 50 19C59 19 68 25 68 40C63 31 57 28.5 50 28.5C43 28.5 37 31 32 40Z"/><path d="M30 44C28 22 72 22 70 44" stroke="#fff" stroke-width="3" fill="none" stroke-linecap="round"/><rect x="26" y="42" width="7" height="13" rx="3" fill="#fff"/><rect x="67" y="42" width="7" height="13" rx="3" fill="#fff"/><path d="M30 55Q34 64 45 59" stroke="#fff" stroke-width="2" fill="none" stroke-linecap="round"/><circle cx="46" cy="59" r="2.8" fill="#d7ab5a"/></g><path class="f-wave w1" d="M82 38q5 7 0 14"/><path class="f-wave w2" d="M88 33q9 12 0 24"/></g></svg>
+          <svg class="fn-fig fig-1" viewBox="0 0 100 100" aria-hidden="true"><g class="f-breathe"><path style="fill:#0b1730" d="M16 100C16 78 30 66 50 66C70 66 84 78 84 100Z"/><g class="f-head"><circle class="hd" cx="50" cy="42" r="18"/><path class="hr" d="M32 40C32 25 41 19 50 19C59 19 68 25 68 40C63 31 57 28.5 50 28.5C43 28.5 37 31 32 40Z"/></g><path class="f-wave w1" d="M82 38q5 7 0 14"/><path class="f-wave w2" d="M88 33q9 12 0 24"/></g></svg>
           <div class="fn-label" id="fn-1-label">Emissor</div>
           <div class="fn-title" id="fn-1-title">conteúdo</div>
         </div>
         <div class="flow-node">
-          <svg class="fn-fig fig-2" viewBox="0 0 100 100" aria-hidden="true"><g class="f-breathe"><circle class="f-ring" cx="50" cy="42" r="28"/><path style="fill:#1a3566" d="M16 100C16 78 30 66 50 66C70 66 84 78 84 100Z"/><g class="f-head"><circle class="hr" cx="50" cy="14" r="6"/><circle class="hd" cx="50" cy="42" r="18"/><path class="hr" d="M32 40C32 25 41 19 50 19C59 19 68 25 68 40C63 31 57 28.5 50 28.5C43 28.5 37 31 32 40Z"/></g><path d="M78 84C90 76 89 66 82 58" stroke="#e7bd76" stroke-width="8" stroke-linecap="round" fill="none"/><rect x="72" y="42" width="16" height="26" rx="4" fill="#0b1730" stroke="#d7ab5a" stroke-width="2.5"/><circle cx="80" cy="47" r="1.5" fill="#d7ab5a"/><circle cx="81" cy="60" r="5" fill="#e7bd76"/><g transform="translate(86 34)"><path class="f-heart h1" d="M0 -1c-2-3-6 0-3 3l3 3 3-3c3-3-1-6-3-3z"/></g><g transform="translate(74 28)"><path class="f-heart h2" d="M0 -1c-2-3-6 0-3 3l3 3 3-3c3-3-1-6-3-3z"/></g></g></svg>
+          <svg class="fn-fig fig-2" viewBox="0 0 100 100" aria-hidden="true"><g class="f-breathe"><circle class="f-ring" cx="50" cy="42" r="28"/><path style="fill:#0b1730" d="M16 100C16 78 30 66 50 66C70 66 84 78 84 100Z"/><g class="f-head"><circle class="hd" cx="50" cy="42" r="18"/><path class="hr" d="M32 40C32 25 41 19 50 19C59 19 68 25 68 40C63 31 57 28.5 50 28.5C43 28.5 37 31 32 40Z"/></g><path d="M78 84C90 76 89 66 82 58" stroke="#1a3566" stroke-width="8" stroke-linecap="round" fill="none"/><rect x="72" y="42" width="16" height="26" rx="4" fill="#0b1730" stroke="#d7ab5a" stroke-width="2.5"/><circle cx="80" cy="47" r="1.5" fill="#d7ab5a"/><circle cx="81" cy="60" r="5" fill="#1a3566"/><g transform="translate(86 34)"><path class="f-heart h1" d="M0 -1c-2-3-6 0-3 3l3 3 3-3c3-3-1-6-3-3z"/></g><g transform="translate(74 28)"><path class="f-heart h2" d="M0 -1c-2-3-6 0-3 3l3 3 3-3c3-3-1-6-3-3z"/></g></g></svg>
           <div class="fn-label" id="fn-2-label">1º elo</div>
           <div class="fn-title" id="fn-2-title">influenciador</div>
         </div>
@@ -611,7 +632,7 @@
           <div class="fn-title" id="fn-3-title">algoritmo</div>
         </div>
         <div class="flow-node">
-          <svg class="fn-fig fig-4" viewBox="0 0 100 100" aria-hidden="true"><g class="f-breathe"><path style="fill:#d7ab5a" d="M16 100C16 78 30 66 50 66C70 66 84 78 84 100Z"/><g class="f-head f-bow"><circle class="hd" cx="50" cy="42" r="18"/><path class="hr" d="M30 52C26 20 74 20 70 52C66 35 58 29 50 29C42 29 34 35 30 52Z"/></g><rect x="36" y="72" width="28" height="25" rx="5" fill="#0b1730" stroke="#fff" stroke-width="2"/><rect x="39" y="75" width="22" height="19" rx="3" fill="#4a72c4"/><path class="f-sc s1" d="M42 80h16"/><path class="f-sc s2" d="M42 80h16"/><path class="f-sc s3" d="M42 80h16"/><circle cx="34" cy="90" r="5" fill="#e7bd76"/><circle cx="66" cy="90" r="5" fill="#e7bd76"/></g></svg>
+          <svg class="fn-fig fig-4" viewBox="0 0 100 100" aria-hidden="true"><g class="f-breathe"><path style="fill:#0b1730" d="M16 100C16 78 30 66 50 66C70 66 84 78 84 100Z"/><g class="f-head f-bow"><circle class="hd" cx="50" cy="42" r="18"/><path class="hr" d="M30 52C26 20 74 20 70 52C66 35 58 29 50 29C42 29 34 35 30 52Z"/></g><rect x="36" y="72" width="28" height="25" rx="5" fill="#0b1730" stroke="#d7ab5a" stroke-width="2"/><rect x="39" y="75" width="22" height="19" rx="3" fill="#4a72c4"/><path class="f-sc s1" d="M42 80h16"/><path class="f-sc s2" d="M42 80h16"/><path class="f-sc s3" d="M42 80h16"/><circle cx="34" cy="90" r="5" fill="#1a3566"/><circle cx="66" cy="90" r="5" fill="#1a3566"/></g></svg>
           <div class="fn-label" id="fn-4-label">Destino</div>
           <div class="fn-title" id="fn-4-title">você</div>
         </div>
