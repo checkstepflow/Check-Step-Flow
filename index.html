@@ -466,7 +466,7 @@
   @keyframes fig-glow { from { opacity: .15; } to { opacity: .45; } }
   .f-sc { fill: none; stroke: #fff; stroke-width: 2; stroke-linecap: round; opacity: 0; animation: fig-scroll 1.8s linear infinite; }
   .f-sc.s2 { animation-delay: .6s; } .f-sc.s3 { animation-delay: 1.2s; }
-  @keyframes fig-scroll { 0% { opacity: 0; transform: translateY(0); } 15% { opacity: 1; } 80% { opacity: 1; } 100% { opacity: 0; transform: translateY(11px); } }
+  @keyframes fig-scroll { 0% { opacity: 0; transform: translateY(0); } 15% { opacity: 1; } 80% { opacity: 1; } 100% { opacity: 0; transform: translateY(9px); } }
   @media (prefers-reduced-motion: reduce) { .fn-fig * { animation: none !important; } .f-wave, .f-heart { opacity: 1; } }
 
   /* ---------- Estatísticas: fundo azul-escuro, cartões brancos, letras douradas ---------- */
@@ -570,6 +570,11 @@
     .mc-icon::after, .mc-icon svg, .mc-icon svg path { animation: none !important; }
     .method-card:nth-child(1) .mc-icon svg path { stroke-dashoffset: 0; }
   }
+
+  /* ---------- Títulos do diagrama: sans em negrito, sem estourar o cartão ---------- */
+  .flow-diagram .flow-node { padding-left: 10px; padding-right: 10px; }
+  .flow-diagram .flow-node .fn-title { font-family: var(--sans); font-style: normal; font-weight: 700; font-size: clamp(15px, 1.9vw, 21px); letter-spacing: -0.01em; overflow-wrap: anywhere; }
+  @media (max-width: 900px) { .flow-diagram { --gap: 20px; } }
 </style>
 
 <div class="page">
@@ -647,7 +652,7 @@
           <div class="fn-title" id="fn-3-title">algoritmo</div>
         </div>
         <div class="flow-node">
-          <svg class="fn-fig fig-4" viewBox="0 0 100 100" aria-hidden="true"><g class="f-breathe"><path style="fill:#0b1730" d="M16 100C16 78 30 66 50 66C70 66 84 78 84 100Z"/><g class="f-head f-bow"><circle class="hd" cx="50" cy="42" r="18"/></g><rect x="26" y="70" width="48" height="26" rx="3" fill="#0b1730" stroke="#d7ab5a" stroke-width="2"/><rect x="30" y="74" width="40" height="18" rx="1.5" fill="#4a72c4"/><path class="f-sc s1" d="M35 78h30"/><path class="f-sc s2" d="M35 78h30"/><path class="f-sc s3" d="M35 78h30"/><rect x="20" y="96" width="60" height="4" rx="2" fill="#d7ab5a"/></g></svg>
+          <svg class="fn-fig fig-4" viewBox="0 0 100 100" aria-hidden="true"><g class="f-breathe"><path style="fill:#0b1730" d="M16 100C16 78 30 66 50 66C70 66 84 78 84 100Z"/><g class="f-head f-bow"><circle class="hd" cx="50" cy="42" r="18"/></g><rect x="25" y="65" width="50" height="29" rx="3.5" fill="#0b1730"/><rect x="28.5" y="68.5" width="43" height="22" rx="1.5" fill="#4a72c4"/><rect x="28.5" y="68.5" width="43" height="4.5" rx="1.5" fill="#1a3566"/><circle cx="31.5" cy="70.8" r="1" fill="#d7ab5a"/><circle cx="34.5" cy="70.8" r="1" fill="#d7ab5a"/><path class="f-sc s1" d="M33 77h24"/><path class="f-sc s2" d="M33 77h24"/><path class="f-sc s3" d="M33 77h24"/><path d="M20 94H80L86 99.5H14Z" fill="#d7ab5a"/></g></svg>
           <div class="fn-label" id="fn-4-label">Destino</div>
           <div class="fn-title" id="fn-4-title">você</div>
         </div>
