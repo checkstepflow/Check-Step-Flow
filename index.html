@@ -555,6 +555,23 @@
   /* ---------- Personagens em azul-escuro ---------- */
   .fn-fig .hd, .fn-fig.fig-1 .hd, .fn-fig.fig-2 .hd, .fn-fig.fig-4 .hd { fill: #1a3566; }
   .fn-fig .hr { fill: #0b1730; }
+
+  /* ---------- Animações dos símbolos da metodologia ---------- */
+  .mc-icon { position: relative; }
+  .mc-icon::after { content: ""; position: absolute; inset: 0; border-radius: 50%; border: 2px solid #fff; opacity: 0; animation: mc-ring 2.6s ease-out infinite; pointer-events: none; }
+  .method-card .mc-icon { width: 48px; height: 48px; }
+  .method-card .mc-icon svg { width: 26px; height: 26px; }
+  @keyframes mc-ring { 0% { transform: scale(1); opacity: .7; } 70%, 100% { transform: scale(1.5); opacity: 0; } }
+  .method-card:nth-child(1) .mc-icon svg path { stroke-dasharray: 16; stroke-dashoffset: 16; animation: mc-check 2.6s ease-in-out infinite; }
+  @keyframes mc-check { 0% { stroke-dashoffset: 16; } 30%, 80% { stroke-dashoffset: 0; } 100% { stroke-dashoffset: 16; } }
+  .method-card:nth-child(2) .mc-icon svg { animation: mc-scan 3s ease-in-out infinite; }
+  @keyframes mc-scan { 0%, 100% { transform: translate(-2px, 1px) rotate(0); } 25% { transform: translate(2px, -2px) rotate(8deg); } 50% { transform: translate(3px, 2px) rotate(0); } 75% { transform: translate(-3px, -1px) rotate(-8deg); } }
+  .method-card:nth-child(3) .mc-icon svg { animation: mc-go 1.5s ease-in-out infinite; }
+  @keyframes mc-go { 0% { transform: translateX(-4px); opacity: 0; } 30% { opacity: 1; } 70% { transform: translateX(3px); opacity: 1; } 100% { transform: translateX(6px); opacity: 0; } }
+  @media (prefers-reduced-motion: reduce) {
+    .mc-icon::after, .mc-icon svg, .mc-icon svg path { animation: none !important; }
+    .method-card:nth-child(1) .mc-icon svg path { stroke-dashoffset: 0; }
+  }
 </style>
 
 <div class="page">
