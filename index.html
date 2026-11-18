@@ -620,11 +620,11 @@
   .ig-post-actions-left { display: flex; align-items: center; gap: 14px; }
   .ig-icon-btn { background: none; border: none; padding: 4px; line-height: 0; cursor: pointer; display: inline-flex; }
   .ig-post-likes { padding: 2px 14px 0; font-size: 14px; font-weight: 600; color: #262626; }
-  .ig-post-caption { padding: 6px 14px 0; font-size: 14px; color: #262626; line-height: 1.45; text-align: left; }
-  .ig-post-caption .ig-hashtags, .ig-post-caption a { color: #00376b; }
   .ig-post-comment { padding: 4px 14px 0; font-size: 14px; color: #262626; text-align: left; }
   .ig-post-time { display: block; padding: 8px 14px 14px; font-size: 10px; letter-spacing: .03em; color: #8e8e8e; text-transform: uppercase; }
   @media (max-width: 500px) { .ig-post { max-width: 100%; } }
+
+  .ig-caption-tags { margin-top: 28px; font-family: var(--mono); font-size: 13px; color: var(--gold); letter-spacing: 0.01em; }
 </style>
 
 <div class="page">
@@ -814,6 +814,28 @@
         </div>
       </div>
       </div>
+    </section>
+
+    <section class="ig-caption wrap" id="post-legenda">
+      <div class="section-head">
+        <div class="eyebrow" id="ig-caption-eyebrow">No Instagram</div>
+        <h2 id="ig-caption-h2">O que é o Check Step Flow</h2>
+      </div>
+      <p id="ig-caption-p1">
+        O Check Step Flow está na <strong>segunda fase do Prêmio LED</strong>, entre as 80 iniciativas do país.
+        É um projeto de alfabetização midiática e informacional: a gente monitora o que viraliza, decodifica como
+        o algoritmo amplifica e quem paga por isso, e devolve ao público um roteiro de checagem.
+      </p>
+      <p id="ig-caption-p2">
+        Começamos pelas apostas online, e o assunto virou pauta nacional. Em 25/09, a <strong>Medida Provisória
+        1394/2026</strong> proibiu as bets, e o tema do nosso piloto foi parar nos principais noticiários do país.
+      </p>
+      <p id="ig-caption-p3">
+        Antes disso, o projeto já tinha sido uma das <strong>2.200 submissões de 129 países</strong> ao UNESCO
+        Youth Hackathon 2026, e a dupla recebeu um certificado oficial de participação. O podcast piloto e o
+        guia de prevenção ao vício em apostas estão no site: checkstepflow.github.io/Check-Step-Flow.
+      </p>
+      <p class="ig-caption-tags" id="ig-caption-tags">#CheckStepFlow #PrêmioLED #AlfabetizaçãoMidiática #UNESCO #Bets Desinformação</p>
     </section>
 
     <section class="guides section-paper">
@@ -1036,7 +1058,6 @@
             <button class="ig-icon-btn" type="button" aria-label="Salvar"><svg viewBox="0 0 24 24" width="24" height="24"><polygon fill="none" stroke="#262626" stroke-width="1.7" stroke-linejoin="round" points="20 21 12 13.44 4 21 4 3 20 3 20 21"/></svg></button>
           </div>
           <div class="ig-post-likes" id="ig-post-likes">3 curtidas</div>
-          <p class="ig-post-caption"><span class="ig-username">checkstepflow</span> <span id="ig-caption-text">🔍 <strong>O QUE É O CHECK STEP FLOW</strong><br><br>O Check Step Flow está na segunda fase do Prêmio LED, entre as 80 iniciativas do país. É um projeto de alfabetização midiática e informacional: a gente monitora o que viraliza, decodifica como o algoritmo amplifica e quem paga por isso, e devolve ao público um roteiro de checagem.<br><br>Começamos pelas apostas online, e o assunto virou pauta nacional. Em 25/09, a Medida Provisória 1394/2026 proibiu as bets, e o tema do nosso piloto foi parar nos principais noticiários do país.<br><br>Antes disso, o projeto já tinha sido uma das 2.200 submissões de 129 países ao UNESCO Youth Hackathon 2026, e a dupla recebeu um certificado oficial de participação. O podcast piloto e o guia de prevenção ao vício em apostas estão no site: checkstepflow.github.io/Check-Step-Flow<br><br><span class="ig-hashtags">#CheckStepFlow #PrêmioLED #AlfabetizaçãoMidiática #UNESCO #Bets Desinformação</span></span></p>
           <p class="ig-post-comment"><span class="ig-username">clara.bmartins</span> 😍</p>
           <time class="ig-post-time" id="ig-post-time">13 DE NOVEMBRO DE 2026</time>
         </article>
@@ -1111,6 +1132,13 @@
     "podcast-eyebrow2": "Featured episode",
     "podcast-h3": "The Algorithm of Fortune: Brazil’s betting market and the industry of inequality",
     "podcast-p": "With Professor Renan Fae, the episode decodes the <strong>Rev-Share and CPA</strong> models, where influencers profit directly from the losses of the followers they refer, based on the Central Bank’s <strong>Special Study No. 119</strong>.",
+
+    "ig-caption-eyebrow": "On Instagram",
+    "ig-caption-h2": "What Check Step Flow is",
+    "ig-caption-p1": "Check Step Flow is in the <strong>second phase of Prêmio LED</strong>, among the country’s 80 initiatives. It is a media and information literacy project: we monitor what goes viral, decode how the algorithm amplifies it and who pays for that, and return a fact-checking script to the public.",
+    "ig-caption-p2": "We started with online betting, and the topic became national news. On 09/25, the <strong>Medida Provisória 1394/2026</strong> banned bets, and our pilot topic ended up on the country’s main newscasts.",
+    "ig-caption-p3": "Before that, the project had already been one of the <strong>2,200 submissions from 129 countries</strong> to the UNESCO Youth Hackathon 2026, and the duo received an official certificate of participation. The pilot podcast and the gambling-addiction prevention guide are on the site: checkstepflow.github.io/Check-Step-Flow.",
+    "ig-caption-tags": "#CheckStepFlow #PrêmioLED #AlfabetizaçãoMidiática #UNESCO #Bets Disinformation",
 
     "guides-eyebrow": "Support material",
     "guides-h2": "Gambling addiction prevention guide.",
